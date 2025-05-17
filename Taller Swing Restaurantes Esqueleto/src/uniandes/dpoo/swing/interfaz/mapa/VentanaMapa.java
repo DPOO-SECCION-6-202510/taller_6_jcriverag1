@@ -40,7 +40,7 @@ public class VentanaMapa extends JFrame implements ActionListener
      * El radio button para hacer que se muestren sólo los restaurantes visitados. Si este está activo, radioTodos debe estar inactivo.
      */
     private JRadioButton radioVisitados;
-
+  
     /**
      * La referencia a la ventana principal
      */
@@ -50,13 +50,30 @@ public class VentanaMapa extends JFrame implements ActionListener
     {
         this.ventanaPrincipal = ventanaPrincipal;
 
-        // Agrega el panel donde se muestra el mapa
-        // TODO completar
+        panelMapa = new PanelMapaVisualizar();
+        panelMapa.actualizarMapa(restaurantes);
+        add(panelMapa, BorderLayout.CENTER);
 
-        // Agrega el panel con los RadioButtons y los configura
-        // TODO completar
+        JPanel panelRadios = new JPanel();
+        radioTodos = new JRadioButton("Todos");
+        radioTodos.setActionCommand(TODOS);
+        radioTodos.addActionListener(this);
 
-        // Termina de configurar la ventana y la muestra
+        radioVisitados = new JRadioButton("Visitados");
+        radioVisitados.setActionCommand(VISITADOS);
+        radioVisitados.addActionListener(this);
+        
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(radioTodos);
+        grupo.add(radioVisitados);
+
+        radioTodos.setSelected(true);
+
+        panelRadios.add(radioTodos);
+        panelRadios.add(radioVisitados);
+
+        add(panelRadios, BorderLayout.SOUTH);
+
         pack( );
         setResizable( false );
         setDefaultCloseOperation( DISPOSE_ON_CLOSE );
