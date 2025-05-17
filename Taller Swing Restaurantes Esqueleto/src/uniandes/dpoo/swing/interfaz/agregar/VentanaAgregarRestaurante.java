@@ -37,10 +37,19 @@ public class VentanaAgregarRestaurante extends JFrame
 
         // Agrega el panel donde va a estar el mapa
         // TODO completar
+        panelDetalles = new PanelEditarRestaurante();
+        panelMapa = new PanelMapaAgregar();
+        panelBotones = new PanelBotonesAgregar(this);
+        add(panelMapa, BorderLayout.CENTER);
 
         // Agrega en el sur un panel para los detalles del restaurante y para los botones
         // TODO completar
-
+        JPanel panelAbajo = new JPanel(new BorderLayout());
+        panelAbajo.add(panelBotones, BorderLayout.SOUTH);
+        panelAbajo.add(panelDetalles, BorderLayout.CENTER);
+        
+        add(panelAbajo, BorderLayout.SOUTH);
+        
         // Termina de configurar la ventana
         pack( );
         setLocationRelativeTo( null );
@@ -54,6 +63,16 @@ public class VentanaAgregarRestaurante extends JFrame
     public void agregarRestaurante( )
     {
         // TODO completar
+        String nombre = panelDetalles.getNombre();
+        boolean visitado = panelDetalles.getVisitado();
+        int calificacion = panelDetalles.getCalificacion();
+
+        int[] coords = panelMapa.getCoordenadas();
+        int x = coords[0];
+        int y = coords[1];
+
+        ventanaPrincipal.agregarRestaurante(nombre, calificacion, x, y, visitado);
+        dispose();
     }
 
     /**
